@@ -1,0 +1,43 @@
+# Red Light Green Light
+
+import random 
+
+def gameDescription():
+	print("You're playing a game against the computer. The goal is to make it 15 steps forward to reach the end. The computer will be randomly guessing numbers, if the computer's number is higher than or equal to yours, you stay, if it is lower than yours, you start over at 0. A step by step recap will be included at the end of the game.")
+
+def game():
+	name = input("What is your name?").upper()
+	steps = int(0)
+	round = int(1)
+	forward = int(input("How many steps do you want to take forward? (Remember, you can take between 1 and 5 steps each round)"))
+	
+	while (steps < 15):
+		botCount = [1, 2, 3, 4, 5]
+		botTurn = random.choice(botCount)
+		print("")
+		print("ROUND " + str(round))
+		print(name + " took " + str(forward) + " steps forward")
+		print("BOT turned around at step " + str(botTurn))
+		if (int(botTurn) > int(forward)):
+			steps = steps + forward
+			print(name + " is now positioned at " + str(steps))
+			forward = int(input("You are now positioned at " + str(steps) + ". How many steps do you want to take forward? (Remember, you can take between 1 and 5 steps each round)"))
+		elif (int(botTurn) < int(forward)):
+			steps = int(0)
+			print(name + " is now positioned at " + str(steps))
+			forward = int(input("You are now positioned at " + str(steps) + ". How many steps do you want to take forward? (Remember, you can take between 1 and 5 steps each round)"))
+		elif (int(botTurn) == int(forward)):
+			steps = steps + forward
+			print(name + " is now positioned at " + str(steps))
+			forward = int(input("You are now positioned at " + str(steps) + ". How many steps do you want to take forward? (Remember, you can take between 1 and 5 steps each round)"))
+		round = round + 1
+	
+	if (steps >= 15):
+		round = round - 1
+		print("")
+		print("Congratulations, " + name + ", you won the game in " + str(round) + " rounds!")
+	
+def main():
+	gameDescription()
+	game()
+main()
